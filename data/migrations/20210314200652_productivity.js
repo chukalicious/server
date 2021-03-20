@@ -10,7 +10,7 @@ exports.up = function (knex) {
     })
     .createTable("tasks", (tbl) => {
       tbl.increments();
-      tbl.text("name").notNullable().unique();
+      tbl.text("task").notNullable().unique();
       tbl.text("description");
       tbl.boolean("completed").defaultTo("false");
       tbl
