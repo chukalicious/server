@@ -19,7 +19,10 @@ router.post("/register", async (req, res) => {
     user.password = hash;
     try {
       const registered = await Users.add(user);
-      res.status(201).json(registered);
+      const token = generateToken(registered);
+      res
+        .status(201)
+        .json({ message: "Registration Successful", token, user: registered });
     } catch (err) {
       res.status(500).json({
         message: "We could not register you at this moment",

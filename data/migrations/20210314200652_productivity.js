@@ -5,7 +5,7 @@ exports.up = function (knex) {
       tbl.text("name", 128).notNullable();
       tbl.text("email").notNullable().unique();
       tbl.text("password").notNullable();
-      tbl.boolean("admin").defaultTo("true").notNullable();
+      tbl.boolean("role").notNullable();
       tbl.text("department");
     })
     .createTable("tasks", (tbl) => {
