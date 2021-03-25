@@ -11,6 +11,20 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/:id", async (req, res) => {
+  const { id } = req.params;
+  const task = await Tasks.findTaskById(id);
+  if (task) {
+    try {
+      res.status(200).json(task);
+    } catch (err) {
+      res.status(500).json({ message: "Server error", error: err.message });
+    }
+  } else {
+    res.status(400).json({ message: "Could not find task but the id" });
+  }
+});
+
 router.post("/user/:id/add_task", async (req, res) => {
   const { id } = req.params;
   const task = {
