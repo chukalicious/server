@@ -3,7 +3,6 @@ const db = require("../../data/db-config");
 module.exports = {
   find,
   findTaskById,
-  findTaskByUser,
   add,
   update,
   remove,
@@ -14,10 +13,8 @@ function find() {
 }
 
 function findTaskById(id) {
-  return db("tasks").where("id", id).first();
+  return db("tasks").where({ id }).first();
 }
-
-function findTaskByUser(userId) {}
 
 async function add(task) {
   const [id] = await db("tasks").insert(task, "id");
