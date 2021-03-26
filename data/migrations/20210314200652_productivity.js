@@ -7,6 +7,7 @@ exports.up = function (knex) {
       tbl.text("password").notNullable();
       tbl.boolean("role").notNullable();
       tbl.text("department");
+      tbl.text("position");
     })
     .createTable("tasks", (tbl) => {
       tbl.increments();
