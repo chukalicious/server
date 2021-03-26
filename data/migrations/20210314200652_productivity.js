@@ -34,9 +34,30 @@ exports.up = function (knex) {
         .notNullable();
       tbl.datetime("date_completed");
       tbl.datetime("due_date");
+    })
+    .createTable("users_tasks", (tbl) => {
+      tbl
+        .integer("user_id")
+        .references("id")
+        .inTable("users")
+        .unsigned()
+        .onUpdate("CASCADE")
+        .onDelete("CASCADE")
+        .notNullable();
+      tbl
+        .integer("task_id")
+        .references("id")
+        .inTable("tasks")
+        .unsigned()
+        .onUpdate("CASCADE")
+        .onDelete("CASCADE");
+      tbl.text("another_column");
     });
 };
 
 exports.down = function (knex) {
-  return knex.schema.dropTableIfExists("tasks").dropTableIfExists("users");
+  return knex.schema
+    .dropTableIfExists("users_tasks")
+    .dropTableIfExists("tasks")
+    .dropTableIfExists("users");
 };
